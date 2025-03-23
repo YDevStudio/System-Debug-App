@@ -14,6 +14,7 @@ const WeeklyOverview = () => {
   const [editingKey, setEditingKey] = useState(null)
   const [editName, setEditName] = useState("")
   const [editDate, setEditDate] = useState("")
+  const [infoMessage, setInfoMessage] = useState("")
 
   useEffect(() => {
     refreshData()
@@ -32,14 +33,19 @@ const WeeklyOverview = () => {
     const monday = today.isoWeekday(1).startOf("day")
     const week = monday.isoWeek()
     return {
-        key: `week_${monday.year()}_${week}`,
-        created: today.valueOf(), // ✅ save today's date, not Monday
-      }
+      key: `week_${monday.year()}_${week}`,
+      created: today.valueOf(), // ✅ save today's date, not Monday
+    }
   }
 
   const handleAddWeek = () => {
     const { key, created } = getCurrentWeekKey()
-    if (weekData[key]) return // Prevent duplicates in current week
+
+    if (weekData[key]) {
+      setInfoMessage("✅ This week already exists. You can continue filling it.")
+      setTimeout(() => setInfoMessage(""), 4000)
+      return
+    }
 
     const newData = {
       ...weekData,
@@ -52,8 +58,11 @@ const WeeklyOverview = () => {
         improve: [],
       },
     }
+
     localStorage.setItem("weekly_review", JSON.stringify(newData))
     refreshData()
+    setInfoMessage("✅ Week added successfully!")
+    setTimeout(() => setInfoMessage(""), 3000)
   }
 
   const handleDelete = () => {
@@ -84,20 +93,20 @@ const WeeklyOverview = () => {
   const saveEdit = (oldKey) => {
     const updatedCreated = dayjs(editDate).valueOf()
     const newKey = `week_${dayjs(editDate).year()}_${dayjs(editDate).isoWeek()}`
-  
+
     const updatedWeek = {
       ...weekData[oldKey],
       name: editName,
       created: updatedCreated,
     }
-  
+
     const newData = { ...weekData }
-  
+
     // Remove old key if it's changing
     if (oldKey !== newKey) {
       delete newData[oldKey]
     }
-  
+
     newData[newKey] = updatedWeek
     localStorage.setItem("weekly_review", JSON.stringify(newData))
     setEditingKey(null)
@@ -116,7 +125,11 @@ const WeeklyOverview = () => {
           <Plus size={20} />
         </button>
       </div>
-
+      {infoMessage && (
+        <div className="mb-4 text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900 px-4 py-2 rounded-lg border border-green-200 dark:border-green-700">
+          {infoMessage}
+        </div>
+      )}
       <div className="overflow-x-auto border rounded-xl shadow">
         <table className="w-full text-sm text-left text-[var(--text)] dark:text-white">
           <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-800">
