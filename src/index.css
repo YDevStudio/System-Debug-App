@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+:root {
+  --bg: #f9fafb;
+  --text: #111827;
+  --primary: #f43f5e;
+  --secondary: #3b82f6;
+}
+
+.dark {
+  --bg: #111827;
+  --text: #f9fafb;
+  --primary: #f43f5e;
+  --secondary: #3b82f6;
+}
+html, body, #root {
+  height: 100%;
+  min-height: 100%;
+}
+/* Smooth transitions for theme switch */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Fix for background transitions */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-text {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.sidebar-collapsed .sidebar-text {
+  opacity: 0;
+  transform: translateX(-10px);
+  pointer-events: none;
+}
+
+
+.input {
+  @apply w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-background dark:bg-gray-800 text-sm text-[var(--text)] dark:text-gray-400 placeholder:text-gray-400 mb-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-150;
+  resize: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-modalEnter {
+  animation: modalEnter 0.25s ease-out;
+}
+
+.icon-btn {
+  @apply p-2 rounded-full transition hover:scale-105 active:scale-95;
+}
+
+.note-enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.note-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.icon-btn-sm {
+  @apply p-1 rounded-full hover:scale-110 transition active:scale-95;
+}
