@@ -22,13 +22,13 @@ const DailyLogTable = ({ logs, onEdit, onDelete }) => {
     return 0
   })
 
-  const thClass = "px-4 py-3 text-sm text-left text-[var(--text)] dark:text-gray-300 cursor-pointer hover:text-primary transition"
+  const thClass = " px-2 md:px-4 py-2 text-sm text-left text-[var(--text)] dark:text-gray-300 cursor-pointer hover:text-primary transition"
 
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 shadow-md bg-[var(--bg)] transition-colors duration-300">
-      <table className="w-full text-sm">
-      <thead className="bg-[var(--bg)] text-[var(--text)] transition-all duration-300">
-                  <tr>
+      <table className="w-full text-sm md:text-base text-left text-[var(--text)] dark:text-white">
+        <thead className="bg-[var(--bg)] text-[var(--text)] transition-all duration-300">
+          <tr>
             {["time", "place", "feeling", "trigger", "response", "mood"].map((key) => (
               <th key={key} className={thClass} onClick={() => toggleSort(key)}>
                 <div className="flex items-center gap-1 capitalize">
@@ -42,7 +42,7 @@ const DailyLogTable = ({ logs, onEdit, onDelete }) => {
                 </div>
               </th>
             ))}
-            <th className="px-4 py-3 text-[var(--text)] transition-colors ">Actions</th>
+            <th className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors ">Actions</th>
           </tr>
         </thead>
 
@@ -51,13 +51,13 @@ const DailyLogTable = ({ logs, onEdit, onDelete }) => {
             <tr
               key={log.id}
               className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ease-in-out duration-300">
-              <td className="px-4 py-3 text-[var(--text)] transition-colors">{log.time}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors">{log.place}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors">{log.feeling}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors">{log.trigger}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors">{log.response}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors capitalize">{log.mood}</td>
-              <td className="px-4 py-3 text-[var(--text)] transition-colors flex gap-2">
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors">{log.time}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors">{log.place}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors">{log.feeling}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors">{log.trigger}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors">{log.response}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors capitalize">{log.mood}</td>
+              <td className="px-2 md:px-4 py-2 text-[var(--text)] transition-colors flex gap-2">
                 <button onClick={() => onEdit(log.id)} className="text-gray-500 hover:text-primary transition">
                   <Pencil size={16} />
                 </button>

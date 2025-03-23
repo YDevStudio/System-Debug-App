@@ -130,14 +130,14 @@ const WeeklyOverview = () => {
           {infoMessage}
         </div>
       )}
-      <div className="overflow-x-auto border rounded-xl shadow">
-        <table className="w-full text-sm text-left text-[var(--text)] dark:text-white">
+      <div className="overflow-x-auto w-full border rounded-xl shadow">
+        <table className="w-full text-sm md:text-base text-left text-[var(--text)] dark:text-white">
           <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-800">
             <tr>
-              <th className="px-4 py-3">#</th>
-              <th className="px-4 py-3">Created</th>
-              <th className="px-4 py-3">Progress</th>
-              <th className="px-4 py-3">Actions</th>
+              <th className="px-2 md:px-4 py-2 px-4 py-3">#</th>
+              <th className="px-2 md:px-4 py-2 px-4 py-3">Created</th>
+              <th className="px-2 md:px-4 py-2 px-4 py-3">Progress</th>
+              <th className="px-2 md:px-4 py-2 px-4 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
